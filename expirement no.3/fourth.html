@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            border: 1px solid #cccccc;
+            box-shadow: 5px 5px 20px 0px rgba(14, 14, 119, 0.75);
+            border-radius: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 550px;
+            background-color: white;
+            color: black;
+        }
+
+        .form {
+            margin-left: 50px;
+        }
+
+        .text-head {
+            color: lightgray;
+            padding: 0px;
+        }
+
+        .input {
+            width: 300px;
+            height: 30px;
+            border-radius: 3px;
+            border: 1px solid green;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+
+        .submit-button {
+            width: 300px;
+            height: 30px;
+            background-color: blue;
+            color: white;
+        }
+    </style>
+    <script>
+        function validate() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var Confirm_password = document.getElementById("password_confirm").value;
+            var name_error = "";
+            var email_error = "";
+            var password_error = "";
+            var Confirm_password_error = "";
+            var atpos = email.indexOf("@");
+            var dotpos = email.lastIndexOf(".");
+            var lower_case = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+            var upper_case = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+            var special_character = ['!', '#', '$', '%', '&', "'", '*', '+', '-', '/', '=', '?', '^', '_', '`', '{', '|', '}', '~', '.'];
+            var number = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+            var lower_case_count = 0;
+            var upper_case_count = 0;
+            var special_character_count = 0;
+            var number_count = 0;
+            for (var index = 0; index < password.length; index++) {
+                var element = password[index];
+                if (element in lower_case) {
+                    lower_case_count = lower_case_count + 1;
+                }
+                if (element in upper_case) {
+                    upper_case_count = upper_case_count + 1;
+                }
+                if (element in special_character) {
+                    special_character_count = special_character_count + 1; 
+                }
+                if(element in number){
+                    number_count = number_count + 1;
+                }
+            }
+            if (name == "") {
+                name_error = "Please provide your name!";
+                document.getElementById("name_error").textContent = name_error;
+                document.getElementById("name").style.border="1px solid red";
+                document.getElementById("name").focus();
+                return false;
+            }
+
+            if (name.length < 3 || name.length > 25) {
+                name_error = "Username should be between 3 and 25 characters";
+                document.getElementById("name_error").textContent = name_error;
+                document.getElementById("name").focus();
+                return false;
+            }
+            if (email == "") {
+                email_error = "Please provide your email!";
+                document.getElementById("email_error").textContent = email_error;
+                document.getElementById("email").style.border="1px solid red";
+                document.getElementById("email").focus();
+                return false;
+            }
+            if (atpos < 1 || (dotpos - atpos < 2)) {
+                email_error = "Please enter a correct email address";
+                document.getElementById("email_error").textContent = email_error;
+                document.getElementById("email").style.border = "1px solid red";
+                document.getElementById("email").focus();
+                return false;
+            }
+            if (password == "") {
+                password_error = "Please proivde your password";
+                document.getElementById("password_error").textContent = password_error;
+                document.getElementById("password").style.border="1px solid red";
+                document.getElementById("password").focus();
+                return false;
+            }
+            if (password.length < 8 || lower_case_count<1 || upper_case_count<1 || number_count<1 || special_character_count<1 ) {
+                password_error = "Password must have at least 8 characters that include at least 1 lowercase character, 1 uppercase character, 1 number, and 1 special character in (!@#$%^&*)";
+                document.getElementById("password_error").textContent = password_error;
+                document.getElementById("password").style.border="1px solid red";
+                document.getElementById("password").focus();
+                return false;
+            }
+            if (Confirm_password == "") {
+                Confirm_password_error = "Please Provide Your Password As Above";
+                document.getElementById("confirm_error").textContent = Confirm_password_error;
+                document.getElementById("password_confirm").style.border="1px solid red";
+                document.getElementById("password_confirm").focus();
+                return false;
+            }
+            if (Confirm_password !== password) {
+                Confirm_password_error = "Please Provide Same Password As Above";
+                document.getElementById("confirm_error").textContent = Confirm_password_error;
+                document.getElementById("password_confirm").style.border="1px solid red";
+                document.getElementById("password_confirm").focus();
+                return false;
+                
+            }
+
+
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h1><center>Ronit Satish Mehta 60009230207</center></h1>
+<div class="container">
+    <form name="SIGN-IN" onsubmit="return validate();">
+        <h1><center>Sign in</center></h1>
+        <table class="form">
+            <tr>
+                <td align="left" class="text-head">Username:<br>
+                    <input type="text" class="input" name="name" id="name" placeholder="enter your name"/><br>
+                    <p id="name_error" class="error"></p><br>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" class="text-head">Email:<br>
+                    <input type="email" class="input" name="email" id="email" placeholder="enter your email"/><br>
+                    <p id="email_error" class="error"></p><br>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" class="text-head">Password:<br>
+                    <input type="password" class="input" name="password" id="password" placeholder="enter your password"/><br>
+                    <p id="password_error" class="error"></p><br>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" class="text-head">Confirm Password:<br>
+                    <input type="password" class="input" name="password_confirm" id="password_confirm" placeholder="enter your password again"><br>
+                    <p id="confirm_error" class="error"></p><br>
+                </td>
+            </tr>
+            <tr>
+                <td align="center"><input type="submit" class="submit-button" name="submit-button" id="submit"
+                                           value="Sign Up"/></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>
