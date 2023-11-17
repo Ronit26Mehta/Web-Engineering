@@ -1,0 +1,20 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE Books[
+<!ELEMENT Books (bookname, author1, author2, bookprice, bookyear,name,sap)>
+<!ELEMENT bookname (#PCDATA)>
+<!ELEMENT author1 (#PCDATA)>
+<!ELEMENT author2 (#PCDATA)>
+<!ELEMENT bookprice (#PCDATA)>
+<!ELEMENT bookyear (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT sap (#PCDATA)>
+]>
+<Books>
+    <name>Ronit Satish Mehta</name>
+    <sap>60009230207</sap>
+    <bookname>1984</bookname>
+    <author1>George Orwell</author1>
+    <author2>Eric Arthur Blair</author2>
+    <bookprice>500</bookprice>
+    <bookyear>1949</bookyear>
+</Books>
